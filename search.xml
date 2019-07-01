@@ -9,14 +9,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[偶然想到的话]]></title>
-    <url>%2F2019%2F03%2F10%2Fjust-some-thing%2F</url>
-    <content type="text"><![CDATA[活着的时候想着死亡的那一天，死后又后悔当初没有好好活着——这恰是一个考生的悲哀。 所谓”Rebirth”，不就是为了”Redeath”吗？ 向死而生，向生而死。 抄题解不可怕，可怕的是被kkk抓到。 重要的不是你做了什么，重要的是让别人相信你做了什么。]]></content>
-      <tags>
-        <tag>Essays</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F03%2F10%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment 能看到这里的你势必见识到我的懒惰了（笑）]]></content>
