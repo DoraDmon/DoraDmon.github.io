@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="差分约束系统复习算法简介 差分约束系统是一种特殊的$N$元一次不等式组，它包含$N$个变量$X_1 \cdots X_N$以及$M$个约束条件，每个约束条件形如$X_i-X_j \le c_k$，其中$c_k$是给定的常数，$1\le i,j\le N,1\le k\le M$。我们要解决的问题是：求一组解$X_1=a_1,X_2=a_2\cdots X_n=a_n$，使所有的约束条件都得到满足。">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提高组备战计划：Task 1 Day 2">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/提高组备战计划：Task-1-Day-2/index.html">
+<meta property="og:site_name" content="Summer_Light&#39;s Blog">
+<meta property="og:description" content="差分约束系统复习算法简介 差分约束系统是一种特殊的$N$元一次不等式组，它包含$N$个变量$X_1 \cdots X_N$以及$M$个约束条件，每个约束条件形如$X_i-X_j \le c_k$，其中$c_k$是给定的常数，$1\le i,j\le N,1\le k\le M$。我们要解决的问题是：求一组解$X_1=a_1,X_2=a_2\cdots X_n=a_n$，使所有的约束条件都得到满足。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-30T10:15:26.850Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="提高组备战计划：Task 1 Day 2">
+<meta name="twitter:description" content="差分约束系统复习算法简介 差分约束系统是一种特殊的$N$元一次不等式组，它包含$N$个变量$X_1 \cdots X_N$以及$M$个约束条件，每个约束条件形如$X_i-X_j \le c_k$，其中$c_k$是给定的常数，$1\le i,j\le N,1\le k\le M$。我们要解决的问题是：求一组解$X_1=a_1,X_2=a_2\cdots X_n=a_n$，使所有的约束条件都得到满足。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/30/提高组备战计划：Task-1-Day-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>提高组备战计划：Task 1 Day 2 | Summer_Light's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Summer_Light's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">May 4th be with you =)</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/提高组备战计划：Task-1-Day-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Samuel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/233.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_Light's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">提高组备战计划：Task 1 Day 2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-30 18:12:00 / 修改时间：18:15:26" itemprop="dateCreated datePublished" datetime="2019-07-30T18:12:00+08:00">2019-07-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/30/提高组备战计划：Task-1-Day-2/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/07/30/提高组备战计划：Task-1-Day-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/07/30/提高组备战计划：Task-1-Day-2/" class="leancloud_visitors" data-flag-title="提高组备战计划：Task 1 Day 2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="差分约束系统复习"><a href="#差分约束系统复习" class="headerlink" title="差分约束系统复习"></a>差分约束系统复习</h1><h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><blockquote>
+<p>差分约束系统是一种特殊的$N$元一次不等式组，它包含$N$个变量$X_1 \cdots X_N$以及$M$个约束条件，每个约束条件形如$X_i-X_j \le c_k$，其中$c_k$是给定的常数，$1\le i,j\le N,1\le k\le M$。我们要解决的问题是：求一组解$X_1=a_1,X_2=a_2\cdots X_n=a_n$，使所有的约束条件都得到满足。</p>
+</blockquote>
+<p>上面这段话是定义以及问题。</p>
+<p>问题是这玩意儿和图论就像土豆学家$Van$和哲学家$Van$一样，完全没有关系。</p>
+<p>但强大的人类硬是扯出来了它与单源最短路径（SPFA）之间的联系，并运用图论知识解决了问题。</p>
+<p>注意到每个约束条件都可以变形成$X_i\le X_j+c_k$，这与单元最短路径中的一个不等式十分相似。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(d[y]&gt;d[x]+z) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//balabalabala</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，我们可以把每个变量$X_i$当成有向图中的一个节点$i$，对于每个约束条件$X_i-X_j \le c_k$，就从$j$到$i$连一条长度为$c_k$的有向边。</p>
+<p>注意到，如果$\{a_1,a_2\cdots a_n\}$是一组解，那么对于任意的常数$d$，把所有的元素全部加上$d$仍然是一组解。</p>
+<p>由于题目中一般会让我们求最小非负数解，所以在处理完了整个系统后要记得将答案减去原解中的最小值。</p>
+<h2 id="一道例题"><a href="#一道例题" class="headerlink" title="一道例题"></a>一道例题</h2><p>这个算法也没什么好多说的了。最重要的还是理解做法，以及能够观察出题目的考点。</p>
+<p>差分约束系统的题一般来说不会太变态，但写不出来正解就很难骗分。</p>
+<blockquote>
+<h3 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h3><p>题目：<a href="https://www.luogu.org/problem/P1250" target="_blank" rel="noopener">LuoguP1250</a></p>
+</blockquote>
+<p>首先要想办法把题目中的条件转化成差分约束能解决的形式。</p>
+<p>首先，有关于源点的约定：</p>
+<script type="math/tex; mode=display">s_i-s_{n+1}\le 0</script><p>看到区间就想到前缀和。显然地，可以把题目条件作如下转换：</p>
+<script type="math/tex; mode=display">s_v-s_{u-1}\ge c_i</script><p>两边乘上$-1$就是：</p>
+<script type="math/tex; mode=display">s_{u-1}-s_v\le -c_i</script><p>其中$s_i$为到第$i$个位置的前缀和。</p>
+<p>然后，因为一个位置只能种一棵树，所以还有一些约束：</p>
+<script type="math/tex; mode=display">0 \le s_u-s_{u-1}\le 1</script><p>题目要求的就是$s_n$，所以跑一遍差分约束然后输出$d_n$就好啦~(≧▽≦)/~</p>
+<p>代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,str;</span><br><span class="line"><span class="keyword">int</span> d[<span class="number">30005</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">30005</span>];</span><br><span class="line"><span class="keyword">int</span> first[<span class="number">30005</span>],nex[<span class="number">500005</span>],ver[<span class="number">500005</span>],edge[<span class="number">500005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> num,<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> l)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ver[num]=v;</span><br><span class="line">    edge[num]=l;</span><br><span class="line">    nex[num]=first[u];</span><br><span class="line">    first[u]=num;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> st)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n+<span class="number">1</span>;i++) d[i]=inf;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    vis[st]=<span class="number">1</span>,d[st]=<span class="number">0</span>;</span><br><span class="line">    q.push(st);</span><br><span class="line">    <span class="keyword">while</span>(q.size())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[x]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=first[x];i;i=nex[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> y=ver[i],z=edge[i];</span><br><span class="line">            <span class="keyword">if</span>(d[y]&gt;d[x]+z)</span><br><span class="line">            &#123;</span><br><span class="line">                d[y]=d[x]+z;</span><br><span class="line">                <span class="keyword">if</span>(vis[y]==<span class="number">0</span>) q.push(y),vis[y]=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++) add_edge(cnt++,n+<span class="number">1</span>,i,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">        add_edge(cnt++,b,a<span class="number">-1</span>,-c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        add_edge(cnt++,i<span class="number">-1</span>,i,<span class="number">1</span>);</span><br><span class="line">        add_edge(cnt++,i,i<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    spfa(n+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> minn=inf;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++) minn=min(minn,d[i]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;d[n]-minn;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="算法总结"><a href="#算法总结" class="headerlink" title="算法总结"></a>算法总结</h2><p>差分约束系统的难点不在于模板，而在于建图。</p>
+<p>多做一些题，锻炼题感才能做出来呐！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/29/提高组备战计划：Task-1-Day-1/" rel="next" title="提高组备战计划：Task 1 Day 1">
+                <i class="fa fa-chevron-left"></i> 提高组备战计划：Task 1 Day 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/233.jpg" alt="Samuel">
+            
+              <p class="site-author-name" itemprop="name">Samuel</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/DoraDmon" title="GitHub &rarr; https://github.com/DoraDmon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:int_128@foxmail.com" title="E-Mail &rarr; mailto:int_128@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/blog/87668/" title="luogu &rarr; https://www.luogu.org/blog/87668/" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>luogu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/190932393" title="bilibili &rarr; https://space.bilibili.com/190932393" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>bilibili</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://luckyfuy.github.io" title="https://luckyfuy.github.io" rel="noopener" target="_blank">Luckyfuy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://potatoj.com" title="http://potatoj.com" rel="noopener" target="_blank">PTOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#差分约束系统复习"><span class="nav-number">1.</span> <span class="nav-text">差分约束系统复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法简介"><span class="nav-number">1.1.</span> <span class="nav-text">算法简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一道例题"><span class="nav-number">1.2.</span> <span class="nav-text">一道例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例1"><span class="nav-number">1.2.1.</span> <span class="nav-text">例1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法总结"><span class="nav-number">1.3.</span> <span class="nav-text">算法总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: '5GLSvI4zNmIRAh4psIE5m6Bt-MdYXbMMI',
+      appKey: '6RzGVI9s4VQfDHkbEnwnKDhv',
+      placeholder: '评论几句吧QwQ',
+      avatar: 'mm',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
