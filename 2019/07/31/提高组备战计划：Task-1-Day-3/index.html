@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="Summer_Light&#39;s Blog">
 <meta property="og:description" content="最小生成树相关算法概论讲道理这玩意儿比最短路简单 生成树的定义 在一个$|V|$个点的无向连通图中，取其中的$|V|-1$条边，并连接所有的顶点，所得到的子图称之为原图的一棵生成树。 树的属性树是图的一种特殊形态。图$G$是树当且仅当满足以下的任意一个条件：  $G$有$|V|-1$条边，无环； $G$有$|V|-1$条边，无环； 任意两点之间只有唯一的简单路径； $G$连通，但删掉任意一条边就不">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-31T06:19:31.238Z">
+<meta property="og:updated_time" content="2019-08-05T14:27:30.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="提高组备战计划：Task 1 Day 3">
 <meta name="twitter:description" content="最小生成树相关算法概论讲道理这玩意儿比最短路简单 生成树的定义 在一个$|V|$个点的无向连通图中，取其中的$|V|-1$条边，并连接所有的顶点，所得到的子图称之为原图的一棵生成树。 树的属性树是图的一种特殊形态。图$G$是树当且仅当满足以下的任意一个条件：  $G$有$|V|-1$条边，无环； $G$有$|V|-1$条边，无环； 任意两点之间只有唯一的简单路径； $G$连通，但删掉任意一条边就不">
@@ -377,12 +377,24 @@
                 
               
 
-              <time title="创建时间：2019-07-31 14:18:00 / 修改时间：14:19:31" itemprop="dateCreated datePublished" datetime="2019-07-31T14:18:00+08:00">2019-07-31</time>
+              <time title="创建时间：2019-07-31 14:18:00" itemprop="dateCreated datePublished" datetime="2019-07-31T14:18:00+08:00">2019-07-31</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-05 22:27:30" itemprop="dateModified" datetime="2019-08-05T22:27:30+08:00">2019-08-05</time>
               
             
           </span>
@@ -457,9 +469,26 @@
 <p>然后每次选一个$V_B$中的点$V_i$，且$d[V_i]$尽可能小；</p>
 <p>答案（生成树大小）加上$d[V_i]$；</p>
 <p>把它塞进$V_A$里面，更新$d$数组。跑路。</p>
-<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a><strong>核心代码</strong></h3><p>存图方式是邻接矩阵。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">(<span class="keyword">int</span> v0)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) d[i]=inf;</span><br><span class="line">    d[v0]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,vi;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> minn=inf;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j]&amp;&amp;minn&gt;d[j])</span><br><span class="line">            &#123;</span><br><span class="line">                minn=d[j];</span><br><span class="line">                vi=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vis[vi]=<span class="number">1</span>;</span><br><span class="line">        ans+=d[vi];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;i&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j]%%d[j]&gt;g[k][j]) d[j]=g[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这货和DJ一样，可以使用堆优化的技巧。优化后的复杂度为$O((n+m)logm)$。</p>
-<h3 id="模板代码"><a href="#模板代码" class="headerlink" title="模板代码"></a><strong>模板代码</strong></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我咕了</span><br></pre></td></tr></table></figure>
+<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a><strong>核心代码</strong></h3><p>存图方式是邻接矩阵。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">prim</span><span class="params">(<span class="keyword">int</span> v0)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) d[i]=inf;</span><br><span class="line">    d[v0]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,vi;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> minn=inf;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j]&amp;&amp;minn&gt;d[j])</span><br><span class="line">            &#123;</span><br><span class="line">                minn=d[j];</span><br><span class="line">                vi=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vis[vi]=<span class="number">1</span>;</span><br><span class="line">        ans+=d[vi];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;i&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j]&amp;&amp;d[j]&gt;g[k][j]) d[j]=g[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码很好写是Prim的一个优点。</p>
+<p>这货和DJ一样，可以使用堆优化的技巧（虽然大部分时候不一定要用）。优化后的复杂度为$O((n+m)logm)$。</p>
+<p>反正我目前还没有看到卡Prim无优化版的题……</p>
+<p><del>懒得写（大雾）</del></p>
+<h2 id="Part-2-Kruskal"><a href="#Part-2-Kruskal" class="headerlink" title="Part 2: Kruskal"></a>Part 2: Kruskal</h2><p>也是一种贪心算法。</p>
+<p>对我来说比Prim常用，因为它原生复杂度就有$O(nlogn+mlogm)$。</p>
+<p>而可怜的Prim不优化只有$O(n^2+m)$。（上香）</p>
+<p>但是Kruskal需要并查集作为前置知识和维护工具，稍微麻烦一点。</p>
+<p><del>（刚刚学的时候我模板总是写炸）</del></p>
+<h3 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a><strong>算法流程</strong></h3><blockquote>
+<p>算法的基本思想是以边为主导地位，始终选择当前可用的最小边权的边（可以直接sort）。每次选择边权最小的边链接两个端点是kruskal的规则，并实时判断两个点之间有没有间接联通。</p>
+</blockquote>
+<p>简单粗暴至极，然而需要并查集，否则复杂度就是个傻子。</p>
+<p>模板如下：（Luogu 最小生成树模板）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> il inline</span></span><br><span class="line"><span class="function">il <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    re <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">    <span class="keyword">while</span>(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(c==<span class="string">'-'</span>) f=<span class="number">-1</span>;c=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>) x=(x&lt;&lt;<span class="number">3</span>)+(x&lt;&lt;<span class="number">1</span>)+(c^<span class="number">48</span>),c=getchar();</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;</span><br><span class="line">&#125;edge[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> fa[<span class="number">5005</span>],n,m,ans,eu,ev,cnt;</span><br><span class="line"><span class="function">il <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Edge a,Edge b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.w&lt;b.w;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">il <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x!=fa[x]) x=fa[x]=fa[fa[x]];</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">il <span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sort(edge,edge+m,cmp);</span><br><span class="line">    <span class="keyword">for</span>(re <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        eu=find(edge[i].u), ev=find(edge[i].v);</span><br><span class="line">        <span class="keyword">if</span>(eu==ev)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans+=edge[i].w;</span><br><span class="line">        fa[ev]=eu;</span><br><span class="line">        <span class="keyword">if</span>(++cnt==n<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read(),m=read();</span><br><span class="line">    <span class="keyword">for</span>(re <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        fa[i]=i;</span><br><span class="line">    <span class="keyword">for</span>(re <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">        edge[i].u=read(),edge[i].v=read(),edge[i].w=read();</span><br><span class="line">    kruskal();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="算法总结"><a href="#算法总结" class="headerlink" title="算法总结"></a>算法总结</h2><p>这两种算法都是非常基础的最小生成树算法。</p>
+<p>其中，因为Kruskal的时间复杂度比较小，所以会比较常用。</p>
+<p><del>话说提高组考过吗（忘了</del></p>
+
       
     </div>
 
@@ -504,6 +533,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/05/提高组备战计划：Task-1-Day-5/" rel="prev" title="提高组备战计划：Task 1 Day 5">
+                提高组备战计划：Task 1 Day 5 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -579,7 +612,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -609,7 +642,8 @@
               
             </nav>
           
-
+<script type="text/javascript" id="clstr_globe" src="//cdn.clustrmaps.com/globe.js?d=1QSyAjnPt9pphife2Amkc3zhV7sjlqEpRc5rPMN2FQk"></script>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="298" height="52" src="//music.163.com/outchain/player?type=2&id=22677433&auto=1&height=32"></iframe>
           
 
           
@@ -708,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最小生成树相关算法"><span class="nav-number">1.</span> <span class="nav-text">最小生成树相关算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概论"><span class="nav-number">1.1.</span> <span class="nav-text">概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成树的定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">生成树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的属性"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小生成树"><span class="nav-number">1.1.3.</span> <span class="nav-text">最小生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小边原则"><span class="nav-number">1.1.4.</span> <span class="nav-text">最小边原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一性定理"><span class="nav-number">1.1.5.</span> <span class="nav-text">唯一性定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Prim"><span class="nav-number">1.2.</span> <span class="nav-text">Part 1: Prim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心代码"><span class="nav-number">1.2.2.</span> <span class="nav-text">核心代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板代码"><span class="nav-number">1.2.3.</span> <span class="nav-text">模板代码</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最小生成树相关算法"><span class="nav-number">1.</span> <span class="nav-text">最小生成树相关算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概论"><span class="nav-number">1.1.</span> <span class="nav-text">概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成树的定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">生成树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的属性"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小生成树"><span class="nav-number">1.1.3.</span> <span class="nav-text">最小生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小边原则"><span class="nav-number">1.1.4.</span> <span class="nav-text">最小边原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一性定理"><span class="nav-number">1.1.5.</span> <span class="nav-text">唯一性定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Prim"><span class="nav-number">1.2.</span> <span class="nav-text">Part 1: Prim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心代码"><span class="nav-number">1.2.2.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Kruskal"><span class="nav-number">1.3.</span> <span class="nav-text">Part 2: Kruskal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法流程-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法总结"><span class="nav-number">1.4.</span> <span class="nav-text">算法总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -909,6 +943,43 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
   
 
 
