@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="强连通分量简述强联通分量与Tarjan 在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量。  说白了就是如果一个有向图的子图里每个点可以两两互达，那么这个子图是一个强联通分量。 而Tarjan算法就是基于DFS求强联通分量的算法。 Tarjan思想Tarjan维护的变量在Tarja">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提高组备战计划：Task 1 Day 4">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/提高组备战计划：Task-1-Day-4/index.html">
+<meta property="og:site_name" content="Summer_Light&#39;s Blog">
+<meta property="og:description" content="强连通分量简述强联通分量与Tarjan 在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量。  说白了就是如果一个有向图的子图里每个点可以两两互达，那么这个子图是一个强联通分量。 而Tarjan算法就是基于DFS求强联通分量的算法。 Tarjan思想Tarjan维护的变量在Tarja">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-07T04:53:50.754Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="提高组备战计划：Task 1 Day 4">
+<meta name="twitter:description" content="强连通分量简述强联通分量与Tarjan 在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量。  说白了就是如果一个有向图的子图里每个点可以两两互达，那么这个子图是一个强联通分量。 而Tarjan算法就是基于DFS求强联通分量的算法。 Tarjan思想Tarjan维护的变量在Tarja">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/提高组备战计划：Task-1-Day-4/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>提高组备战计划：Task 1 Day 4 | Summer_Light's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Summer_Light's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">May 4th be with you =)</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/提高组备战计划：Task-1-Day-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Samuel">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/233.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Summer_Light's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">提高组备战计划：Task 1 Day 4
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-07 12:51:00 / 修改时间：12:53:50" itemprop="dateCreated datePublished" datetime="2019-08-07T12:51:00+08:00">2019-08-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/07/提高组备战计划：Task-1-Day-4/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/07/提高组备战计划：Task-1-Day-4/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/08/07/提高组备战计划：Task-1-Day-4/" class="leancloud_visitors" data-flag-title="提高组备战计划：Task 1 Day 4">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="强连通分量"><a href="#强连通分量" class="headerlink" title="强连通分量"></a>强连通分量</h1><h2 id="简述强联通分量与Tarjan"><a href="#简述强联通分量与Tarjan" class="headerlink" title="简述强联通分量与Tarjan"></a>简述强联通分量与Tarjan</h2><blockquote>
+<p>在有向图G中，如果两个顶点间至少存在一条路径，称两个顶点强连通。如果有向图G的每两个顶点都强连通，称G是一个强连通图。非强连通图有向图的极大强连通子图，称为强连通分量。</p>
+</blockquote>
+<p>说白了就是如果一个有向图的子图里每个点可以两两互达，那么这个子图是一个强联通分量。</p>
+<p>而Tarjan算法就是基于DFS求强联通分量的算法。</p>
+<h2 id="Tarjan思想"><a href="#Tarjan思想" class="headerlink" title="Tarjan思想"></a>Tarjan思想</h2><h3 id="Tarjan维护的变量"><a href="#Tarjan维护的变量" class="headerlink" title="Tarjan维护的变量"></a><strong>Tarjan维护的变量</strong></h3><p>在Tarjan算法中我们维护如下的变量：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];<span class="comment">//图本身（邻接表）</span></span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;s;<span class="comment">//栈，存放答案</span></span><br><span class="line"><span class="keyword">int</span> vis[maxn];<span class="comment">//标记点是否在栈中</span></span><br><span class="line"><span class="keyword">int</span> dfn[maxn];<span class="comment">//节点i的时间戳</span></span><br><span class="line"><span class="keyword">int</span> low[maxn];<span class="comment">//节点i能够回溯到的最早位于栈中的节点。（子树的根，可以理解为并查集的“祖先”一类的东西）</span></span><br><span class="line"><span class="keyword">int</span> color[maxn];<span class="comment">//每个点属于第几个强联通分量</span></span><br><span class="line"><span class="keyword">int</span> colornum;<span class="comment">//强连通分量的个数</span></span><br><span class="line"><span class="keyword">int</span> cnt;<span class="comment">//当前时间</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Tarjan算法运行过程"><a href="#Tarjan算法运行过程" class="headerlink" title="Tarjan算法运行过程"></a><strong>Tarjan算法运行过程</strong></h3><p>按照深度优先遍历的方式遍历这张图。</p>
+<p>遍历当前节点所出的所有边。在遍历过程中：</p>
+<pre><code>( 1 ) 如果当前边的终点还没有访问过，访问。
+
+回溯回来之后比较当前节点的low值和终点的low值。将较小的变为当前节点的low值。（因为遍历到终点时有可能触发了2）
+
+( 2 ) 如果已经访问过，那我们一定走到了一个之前已经走过的点（终点的时间戳一定比当前的小）
+
+则比较当前节点的low值和终点的dfn值。将较小的变为当前节点的low值
+
+在回溯过程中，对于任意节点u用其出边的终点v的low值来更新节点u的low值。因为节点v能够回溯到的已经在栈中的节点，节点u也一定能够回溯到。因为存在从u到v的直接路径，所以v能够到的节点u也一定能够到。
+
+当一个节点的dfn值和low值相等时，这个节点是一个强联通分量的“根”。压栈，输出。
+</code></pre><p>我知道这让你听得很迷糊，先来一段伪代码看看吧。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span><span class="comment">//当前节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfn[u]=low[u]=++cnt;<span class="comment">//该节点本身是一个强联通分量</span></span><br><span class="line">    节点入栈;</span><br><span class="line">    vis[u]=<span class="literal">true</span>;<span class="comment">//当前节点已入栈</span></span><br><span class="line">    <span class="keyword">for</span>(遍历该节点所有出边)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v=当前边的终点;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[v])</span><br><span class="line">        &#123;</span><br><span class="line">            tarjan(v);<span class="comment">//深度优先遍历</span></span><br><span class="line">            low[u]=min(low[u],low[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> low[u]=min(dfn[v],low[u]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[u]==dfn[u])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(栈顶!=v)</span><br><span class="line">        &#123;</span><br><span class="line">            染色;</span><br><span class="line">            出栈;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    染色;</span><br><span class="line">    出栈;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>手模一组数据就不模啦，网上到处都是。</p>
+<h2 id="完整code"><a href="#完整code" class="headerlink" title="完整code"></a><strong>完整code</strong></h2><p>这里以洛谷P2863 [USACO06JAN]牛的舞会The Cow Prom为例。</p>
+<p>题意为：给定一个图，要求图中节点数大于一的强联通分量个数。 对于这道模板题，我们应当做到一遍A掉。<del>个鬼啊</del><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 10001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;G[maxn];</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt;s;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> dfn[maxn],used[maxn],vis[maxn],low[maxn],color[maxn],num[maxn],colornum=<span class="number">0</span>,cnt=<span class="number">0</span>,ans=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.pop();</span><br><span class="line">    color[x]=colornum;</span><br><span class="line">    num[colornum]++;</span><br><span class="line">    vis[x]=<span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfn[x]=low[x]=++cnt;</span><br><span class="line">    s.push(x);</span><br><span class="line">    vis[x]=used[x]=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[x].size();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> q=G[x][i];</span><br><span class="line">        <span class="keyword">if</span> (!dfn[q])</span><br><span class="line">        &#123;</span><br><span class="line">            tarjan(q);</span><br><span class="line">            low[x]=min(low[x],low[q]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (vis[q]) low[x]=min(low[x],dfn[q]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[x]==dfn[x])</span><br><span class="line">    &#123;</span><br><span class="line">        colornum++;</span><br><span class="line">        <span class="keyword">while</span>(s.top()!=x)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> t=s.top();</span><br><span class="line">            paint(t);</span><br><span class="line">        &#125;</span><br><span class="line">        paint(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,v;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!used[i]) tarjan(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=colornum;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (num[i]&gt;<span class="number">1</span>) ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="转载注明"><a href="#转载注明" class="headerlink" title="转载注明"></a>转载注明</h2><p>本文转自洛谷一位<a href="https://www.luogu.org/space/show?uid=41953" target="_blank" rel="noopener">大佬</a>的P2863题解。已向本人申请。</p>
+<p>由于本人强连通分量掌握得不是很好，写的不太清楚，故决定转载。</p>
+<p>但大佬好像已经消失了一段时间。</p>
+<p><del>也许退役了？</del></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/提高组备战计划：Task-1-Day-5/" rel="next" title="提高组备战计划：Task 1 Day 5">
+                <i class="fa fa-chevron-left"></i> 提高组备战计划：Task 1 Day 5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/233.jpg" alt="Samuel">
+            
+              <p class="site-author-name" itemprop="name">Samuel</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="280" height="52" src="//music.163.com/outchain/player?type=2&id=22677570&auto=0&height=32"></iframe>
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/DoraDmon" title="GitHub &rarr; https://github.com/DoraDmon" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:int_128@foxmail.com" title="E-Mail &rarr; mailto:int_128@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/blog/87668/" title="luogu &rarr; https://www.luogu.org/blog/87668/" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>luogu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/190932393" title="bilibili &rarr; https://space.bilibili.com/190932393" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>bilibili</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://luckyfuy.github.io" title="https://luckyfuy.github.io" rel="noopener" target="_blank">Luckyfuy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://potatoj.com" title="http://potatoj.com" rel="noopener" target="_blank">PTOJ</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://lzwblog.tk" title="http://lzwblog.tk" rel="noopener" target="_blank">LiZiWei</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#强连通分量"><span class="nav-number">1.</span> <span class="nav-text">强连通分量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简述强联通分量与Tarjan"><span class="nav-number">1.1.</span> <span class="nav-text">简述强联通分量与Tarjan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan思想"><span class="nav-number">1.2.</span> <span class="nav-text">Tarjan思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tarjan维护的变量"><span class="nav-number">1.2.1.</span> <span class="nav-text">Tarjan维护的变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tarjan算法运行过程"><span class="nav-number">1.2.2.</span> <span class="nav-text">Tarjan算法运行过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整code"><span class="nav-number">1.3.</span> <span class="nav-text">完整code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转载注明"><span class="nav-number">1.4.</span> <span class="nav-text">转载注明</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Samuel</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+      el: '#comments' ,
+      verify: false,
+      notify: false,
+      appId: '5GLSvI4zNmIRAh4psIE5m6Bt-MdYXbMMI',
+      appKey: '6RzGVI9s4VQfDHkbEnwnKDhv',
+      placeholder: '评论几句吧QwQ',
+      avatar: 'mm',
+      meta:guest,
+      pageSize: '10' || 10,
+      visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
